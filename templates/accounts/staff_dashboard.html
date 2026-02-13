@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Staff Dashboard - Patient Portal{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <h2 class="mb-4">Staff Dashboard</h2>
+  </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row mb-4">
+  <div class="col-md-3 mb-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h3 class="text-primary">{{ total_patients }}</h3>
+        <p class="text-muted mb-0">Patients</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 mb-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h3 class="text-success">{{ total_providers }}</h3>
+        <p class="text-muted mb-0">Providers</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 mb-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h3 class="text-warning">{{ pending_refills }}</h3>
+        <p class="text-muted mb-0">Pending Refills</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 mb-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h3 class="text-info">{{ total_medications }}</h3>
+        <p class="text-muted mb-0">Medications</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mb-4">
+  <div class="col-md-6 mb-3">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Quick Actions</h5>
+      </div>
+      <div class="card-body">
+        <a href="{% url 'staff-create-patient' %}" class="btn btn-outline-primary me-2 mb-2">
+          + New Patient
+        </a>
+        <a href="{% url 'staff-add-medication' %}" class="btn btn-outline-success mb-2">
+          + Add Medication
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Recent Activity -->
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-secondary text-white">
+        <h5 class="mb-0">Recent Refill Requests</h5>
+      </div>
+      <div class="card-body">
+        {% if recent_requests %}
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Medication</th>
+                  <th>Status</th>
+                  <th>Requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for req in recent_requests %}
+                  <tr>
+                    <td>{{ req.patient.username }}</td>
+                    <td>{{ req.medication.name }}</td>
+                    <td>
+                      <span class="badge {% if req.status == 'APPROVED' %}bg-success{% elif req.status == 'DENIED' %}bg-danger{% elif req.status == 'CANCELLED' %}bg-secondary{% else %}bg-warning text-dark{% endif %}">
+                        {{ req.status }}
+                      </span>
+                    </td>
+                    <td>{{ req.requested_at|date:"M d, Y g:i A" }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <p class="text-muted mb-0">No refill requests yet.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Provider Dashboard - Patient Portal{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <h2 class="mb-4">Provider Dashboard</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-warning text-dark">
+        <h5 class="mb-0">Pending Refill Requests ({{ pending_requests|length }})</h5>
+      </div>
+      <div class="card-body">
+        {% if pending_requests %}
+          {% for req in pending_requests %}
+            <div class="border rounded p-3 mb-3">
+              <div class="row">
+                <div class="col-md-6">
+                  <h5 class="mb-1">{{ req.medication.name }}</h5>
+                  <p class="text-muted mb-1">{{ req.medication.dose }} · {{ req.medication.frequency }}</p>
+                  <p class="mb-0">
+                    <strong>Patient:</strong> {{ req.patient.username }}<br>
+                    <small class="text-muted">Requested: {{ req.requested_at|date:"M d, Y g:i A" }}</small>
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <div class="row g-2">
+                    <div class="col-12">
+                      <input type="text" id="note-{{ req.id }}" class="form-control form-control-sm" placeholder="Add a note (optional)">
+                    </div>
+                    <div class="col-6">
+                      <form method="post" action="{% url 'approve-refill' req.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="note" id="approve-note-{{ req.id }}">
+                        <button type="submit" class="btn btn-success w-100" onclick="document.getElementById('approve-note-{{ req.id }}').value = document.getElementById('note-{{ req.id }}').value;">
+                          Approve
+                        </button>
+                      </form>
+                    </div>
+                    <div class="col-6">
+                      <form method="post" action="{% url 'deny-refill' req.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="note" id="deny-note-{{ req.id }}">
+                        <button type="submit" class="btn btn-danger w-100" onclick="document.getElementById('deny-note-{{ req.id }}').value = document.getElementById('note-{{ req.id }}').value;">
+                          Deny
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-muted mb-0">No pending requests to review.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-secondary text-white">
+        <h5 class="mb-0">Recent Decisions</h5>
+      </div>
+      <div class="card-body">
+        {% if processed_requests %}
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Medication</th>
+                  <th>Patient</th>
+                  <th>Decision</th>
+                  <th>Date</th>
+                  <th>Note</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for req in processed_requests %}
+                  <tr>
+                    <td>{{ req.medication.name }}</td>
+                    <td>{{ req.patient.username }}</td>
+                    <td>
+                      <span class="badge {% if req.status == 'APPROVED' %}bg-success{% else %}bg-danger{% endif %}">
+                        {{ req.status }}
+                      </span>
+                    </td>
+                    <td>{{ req.reviewed_at|date:"M d, Y" }}</td>
+                    <td>{{ req.provider_note|default:"-" }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <p class="text-muted mb-0">No processed requests yet.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

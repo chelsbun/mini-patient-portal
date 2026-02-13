@@ -1,0 +1,887 @@
+## ?? CRITICAL: MANDATORY WORKFLOW (NEVER SKIP STEPS)
+
+### Session Startup Protocol (MANDATORY FIRST STEP)
+Before starting ANY work, AI MUST:
+1. **STATUS CHECK** ? Read current project files to understand exact state
+2. **RULES VERIFICATION** ? Confirm all development rules are being followed
+3. **CONTEXT REFRESH** ? Understand what's been built and what's next
+4. **QUALITY AUDIT** ? Check for any existing issues or technical debt
+
+### The Professional Development Cycle (5-10 minutes per iteration)
+1. **PLAN** ? Define the small task (one thing only)
+2. **CODE** ? Write 20-30 lines maximum
+3. **EXPLAIN** ? Describe what changed and why
+4. **TEST** ? Verify in browser/environment immediately
+5. **VERIFY** ? Get user confirmation it works
+6. **COMMIT** ? Git commit with clear message
+7. **NEXT** ? Move to next small task
+
+**NEVER skip steps. NEVER write large chunks. ALWAYS verify.**
+
+---
+
+## ?? RULE 0: PROFESSIONAL DOCUMENTATION STANDARDS
+
+### Code Documentation Requirements (MANDATORY)
+Every file and function MUST have:
+- **File Header**: Purpose, author, last modified date
+- **Function JSDoc**: Parameters, return values, exceptions, examples
+- **Complex Logic Comments**: Explain WHY, not WHAT
+- **API Documentation**: Request/response formats, status codes
+- **Setup Instructions**: Clear README with environment setup
+
+### Documentation Quality Checklist
+- [ ] Every public function has JSDoc
+- [ ] Complex business logic is explained
+- [ ] API endpoints are documented
+- [ ] Environment variables are listed
+- [ ] Installation steps are clear
+- [ ] Examples are provided for key features
+- [ ] Troubleshooting section exists
+
+---
+
+## ?? RULE 1: SMALL INCREMENTS ONLY (STRICTLY ENFORCED)
+
+### Code Size Limits
+- **Ideal**: 20-30 lines per change
+- **Maximum**: 30 lines per change
+- **Hard Limit**: 50 lines (NEVER exceed without explicit permission)
+- **If task needs more**: Break it into smaller subtasks
+
+### Scope Limits
+- ONE file at a time
+- ONE feature/function at a time
+- ONE component at a time
+- ONE endpoint at a time
+
+### Breaking Down Large Tasks
+If a task seems large, decompose it:
+- "Build authentication" ? 1) Login form UI, 2) Input validation, 3) API call, 4) Error handling, 5) Success redirect
+- "Create dashboard" ? 1) Layout structure, 2) Header component, 3) Data fetching, 4) Loading state, 5) Display data
+
+---
+
+## ? RULE 2: VERIFICATION CHECKPOINT AFTER EVERY CHANGE
+
+After EVERY code change, AI must provide:
+
+### 1. Change Summary
+- **Current Task**: [specific task name]
+- **What We're Doing**: [1-2 sentences in plain English]
+- **Expected Outcome**: [what user will see/experience]
+
+### 2. Technical Details
+- **Files Changed**: [list with line count for each]
+- **Total Lines**: [must be ?30]
+- **Code Change**: [the actual code]
+
+### 3. Verification Instructions
+- **How to Verify**: [specific step-by-step testing instructions]
+- **Checklist**: [observable outcomes to confirm]
+  - [ ] Feature works as expected
+  - [ ] No console errors
+  - [ ] Mobile responsive
+  - [ ] Previous features still work
+
+### 4. Stop and Wait
+**STOP - WAITING FOR CONFIRMATION**
+
+User must reply: "confirmed", "issue: [description]", or "question: [question]"
+
+**AI MUST NOT continue until user confirms.**
+
+---
+
+## ?? RULE 3: MANDATORY 10-POINT QUALITY AUDIT
+
+### Session Startup Quality Check (MANDATORY)
+Before starting work, AI MUST:
+1. **Read all current files** to understand project state
+2. **Run read_lints on entire project** to check for existing issues
+3. **Verify all established rules** are being followed
+4. **Check for technical debt** or anti-patterns
+5. **Confirm project structure** matches expected state
+
+### Post-Change Quality Audit (MANDATORY)
+After EVERY file creation or edit (no exceptions), AI MUST:
+
+1. **Run read_lints** on the specific file/directory that was changed
+2. **Display the results** in the response (show "No linter errors found" or list specific errors)
+3. **If errors exist**, FIX THEM IMMEDIATELY before moving to next task
+4. **Include verification section** showing:
+   - ? Code written: [X lines]
+   - ? Ran read_lints: [yes/no]
+   - ? Linter result: [specific output]
+   - ? Errors found: [number and description]
+   - ? All errors fixed: [yes/no]
+
+### MANDATORY 12-POINT QUALITY AUDIT CHECKLIST:
+1. ? **Linter check** - No errors in file or project
+2. ? **No console.log** - None present (production code smell)
+3. ? **Accessibility** - Labels, aria attributes, semantic HTML
+4. ? **Error handling** - Try/catch, error states, loading states
+5. ? **Imports exist** - All imports reference files that exist
+6. ? **Functions under 50 lines** - All functions are manageable
+7. ? **Meaningful names** - No temp, data, thing, obj (clear, descriptive)
+8. ? **Naming consistency** - Same patterns across all files (camelCase, PascalCase, kebab-case)
+9. ? **Logic error prevention** - Check for null/undefined, edge cases, race conditions
+10. ? **Defensive programming** - Input validation, null checks
+11. ? **Security** - No hardcoded secrets, no exposed sensitive data
+12. ? **No TODO comments** - All TODOs should be actual code
+
+**If ANY check fails, AI must fix it immediately or explain why it cannot be fixed yet.**
+
+### Naming Convention Standards (MANDATORY CONSISTENCY)
+AI MUST ensure consistent naming across ALL files:
+- **React Components**: PascalCase (`EmployeeDashboard`, `LoginForm`)
+- **Variables/Functions**: camelCase (`userName`, `handleSubmit`, `isLoading`)
+- **CSS Classes**: kebab-case (`dashboard-container`, `login-form`)
+- **Files**: kebab-case (`employee-dashboard.tsx`, `auth.service.ts`)
+- **Constants**: UPPER_SNAKE_CASE (`API_BASE_URL`, `MAX_RETRY_ATTEMPTS`)
+- **Interfaces/Types**: PascalCase with descriptive suffixes (`User`, `AuthState`, `LoginResponse`)
+- **Event Handlers**: camelCase with 'handle' prefix (`handleClick`, `handleSubmit`)
+- **Boolean Variables**: camelCase with 'is/has/can' prefix (`isLoading`, `hasError`, `canSubmit`)
+
+### Logic Error Prevention (MANDATORY CHECKS)
+AI MUST proactively check for:
+- **Null/Undefined Access**: `user?.name` instead of `user.name`
+- **Array Bounds**: Check `array.length > 0` before accessing
+- **Async Race Conditions**: Proper loading states and cleanup
+- **State Consistency**: Ensure state updates are atomic
+- **Memory Leaks**: Cleanup event listeners and subscriptions
+- **Infinite Loops**: Validate loop conditions and exit criteria
+- **Type Coercion**: Explicit type checking, avoid `==` comparisons
+- **Edge Cases**: Empty arrays, null objects, undefined values
+- **API Failures**: Handle network errors, timeouts, malformed responses
+- **User Input Validation**: Check for required fields, format validation
+
+### Cross-File Consistency Checks (MANDATORY)
+AI MUST verify consistency across ALL project files:
+- **Import/Export Patterns**: Consistent import styles and export patterns
+- **Type Definitions**: Same interface names across files
+- **CSS Variable Usage**: Consistent CSS custom property usage
+- **Component Props**: Consistent prop naming and typing
+- **API Response Handling**: Same error handling patterns
+- **State Management**: Consistent state update patterns
+- **File Organization**: Logical folder structure and naming
+- **Code Style**: Consistent formatting and indentation
+
+### Session Continuity Requirements
+When resuming work (new chat session), AI MUST:
+1. **Read PROJECT_STATUS.md** (if it exists) to understand current state
+2. **Read all source files** to verify actual vs. expected state
+3. **Run full project lint check** to identify any issues
+4. **Check naming consistency** across all files
+5. **Verify logic error prevention** in existing code
+6. **Confirm all rules are being followed** in existing code
+7. **Identify next logical task** based on current state
+8. **Provide status summary** to user before proceeding
+
+---
+
+## ?? RULE 3.1: VERSION CONTROL BEST PRACTICES
+
+### Git Workflow Standards (MANDATORY)
+- **Atomic Commits**: One logical change per commit
+- **Descriptive Messages**: Clear, actionable commit messages
+- **Branch Protection**: Feature branches for major changes
+- **Commit Frequency**: Commit after each verified change
+- **No Direct Main**: Always use feature branches for development
+
+### Commit Message Standards
+```
+<type>: <description>
+
+[optional body explaining WHY]
+
+[optional footer with breaking changes]
+```
+
+**Types**: feat, fix, docs, style, refactor, test, chore
+**Examples**:
+- `feat: add employee dashboard with authentication`
+- `fix: prevent race condition in login form`
+- `refactor: extract API service layer`
+
+### Pre-Commit Checklist
+- [ ] Code compiles without errors
+- [ ] All tests pass (when available)
+- [ ] No console.log statements
+- [ ] No hardcoded secrets
+- [ ] Meaningful commit message
+- [ ] Single logical change
+
+---
+
+## ?? RULE 3.2: DEPLOYMENT & PRODUCTION READINESS
+
+### Production Readiness Checklist (MANDATORY)
+Before ANY deployment:
+- [ ] Environment variables configured
+- [ ] Content Security Policy implemented
+- [ ] Error monitoring configured
+- [ ] Performance monitoring enabled
+- [ ] Health check endpoints working
+- [ ] Database migrations completed
+- [ ] SSL/TLS certificates valid
+- [ ] Backup strategy implemented
+
+### Deployment Pipeline Standards
+- **Automated Testing**: Run tests before deployment
+- **Environment Parity**: Dev/staging/prod consistency
+- **Rollback Strategy**: Quick rollback capability
+- **Monitoring**: Application and infrastructure monitoring
+- **Logging**: Structured logging for debugging
+- **Security Scanning**: Vulnerability assessment
+
+### Performance Standards
+- **Lighthouse Score**: 90+ in all categories
+- **Bundle Size**: Optimized and monitored
+- **Loading Time**: <3 seconds initial load
+- **Mobile Performance**: 320px-1920px responsive
+- **Accessibility**: WCAG 2.1 AA compliance
+
+---
+
+## ?? RULE 3.3: TESTING STRATEGY & COVERAGE
+
+### Testing Requirements (MANDATORY)
+- **Unit Tests**: All business logic functions
+- **Integration Tests**: API endpoints and data flow
+- **Component Tests**: React component behavior
+- **E2E Tests**: Critical user journeys
+- **Error Scenarios**: Failure cases and edge conditions
+
+### Test Quality Standards
+- **Test Isolation**: Each test is independent
+- **Deterministic**: Tests produce consistent results
+- **Fast Execution**: Unit tests <100ms each
+- **Clear Names**: Test names explain the scenario
+- **Mock External**: APIs, databases, file system
+- **Coverage Target**: 80%+ meaningful coverage
+
+### Test Organization
+```
+tests/
+??? unit/           # Business logic tests
+??? integration/    # API and service tests
+??? components/     # React component tests
+??? e2e/           # End-to-end user flows
+??? fixtures/      # Test data and mocks
+```
+
+---
+
+## ?? RULE 3.4: MONITORING & OBSERVABILITY
+
+### Application Monitoring (MANDATORY)
+- **Error Tracking**: Sentry or similar for error capture
+- **Performance Monitoring**: Core Web Vitals tracking
+- **User Analytics**: Usage patterns and feature adoption
+- **API Monitoring**: Response times and error rates
+- **Database Monitoring**: Query performance and connections
+
+### Logging Standards
+- **Structured Logging**: JSON format for parsing
+- **Log Levels**: ERROR, WARN, INFO, DEBUG appropriately
+- **Context Information**: User ID, session, request ID
+- **No Sensitive Data**: Never log passwords, tokens, PII
+- **Centralized Collection**: ELK stack or similar
+
+### Alerting Strategy
+- **Critical Errors**: Immediate notification
+- **Performance Degradation**: 5-minute thresholds
+- **Security Events**: Real-time alerts
+- **Capacity Issues**: Proactive scaling alerts
+- **Business Metrics**: Key performance indicators
+
+---
+
+## ?? RULE 3.5: SECURITY & COMPLIANCE
+
+### Security Scanning (MANDATORY)
+- **Dependency Vulnerabilities**: npm audit, Snyk
+- **Code Security**: ESLint security rules
+- **Container Security**: Image vulnerability scanning
+- **Infrastructure Security**: Cloud security best practices
+- **Penetration Testing**: Regular security assessments
+
+### Data Protection Compliance
+- **GDPR Compliance**: Data privacy and user rights
+- **Data Encryption**: At rest and in transit
+- **Access Controls**: Role-based permissions
+- **Audit Trails**: User actions and data changes
+- **Data Retention**: Automated cleanup policies
+
+### Security Headers (MANDATORY)
+```
+Content-Security-Policy: default-src 'self'
+X-Frame-Options: DENY
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: geolocation=(), microphone=(), camera=()
+```
+
+---
+
+## ?? RULE 3.6: TEAM COLLABORATION & CODE REVIEW
+
+### Code Review Standards (MANDATORY)
+- **Peer Review**: All code changes require review
+- **Automated Checks**: CI/CD pipeline validation
+- **Review Criteria**: Functionality, security, performance, maintainability
+- **Review Timeline**: Within 24 hours for critical changes
+- **Approval Process**: At least one approved review required
+
+### Code Review Checklist
+- [ ] Code follows established patterns
+- [ ] No security vulnerabilities introduced
+- [ ] Performance implications considered
+- [ ] Tests written for new functionality
+- [ ] Documentation updated if needed
+- [ ] No breaking changes without notice
+- [ ] Accessibility requirements met
+
+### Team Communication Standards
+- **Clear Commit Messages**: Self-explanatory changes
+- **Pull Request Descriptions**: Context and testing instructions
+- **Issue Templates**: Structured bug reports and feature requests
+- **Documentation Updates**: Keep team knowledge current
+- **Knowledge Sharing**: Regular tech talks and documentation
+
+### Collaboration Tools Integration
+- **Project Management**: Clear task tracking and priorities
+- **Communication**: Async-first with clear documentation
+- **Knowledge Base**: Centralized documentation and decisions
+- **Incident Response**: Clear escalation and resolution procedures
+
+---
+
+## ?? RULE 3.7: PERFORMANCE & SCALABILITY
+
+### Performance Monitoring (MANDATORY)
+- **Core Web Vitals**: LCP <2.5s, FID <100ms, CLS <0.1
+- **Bundle Analysis**: Regular size monitoring and optimization
+- **API Performance**: Response time tracking and optimization
+- **Database Performance**: Query optimization and indexing
+- **CDN Optimization**: Asset delivery and caching strategies
+
+### Scalability Considerations
+- **Horizontal Scaling**: Design for multiple instances
+- **Database Scaling**: Read replicas and connection pooling
+- **Caching Strategy**: Multi-layer caching implementation
+- **Load Balancing**: Traffic distribution and failover
+- **Resource Monitoring**: CPU, memory, and network usage
+
+### Performance Optimization
+- **Code Splitting**: Lazy loading and dynamic imports
+- **Image Optimization**: WebP, lazy loading, responsive images
+- **Bundle Optimization**: Tree shaking and dead code elimination
+- **API Optimization**: Request batching and caching
+- **Database Optimization**: Proper indexing and query optimization
+
+---
+
+## ??? RULE 4: SECURITY REQUIREMENTS (NON-NEGOTIABLE)
+
+### Input Validation & Sanitization
+- **ALWAYS** validate and sanitize user input
+- Use parameterized queries/prepared statements (NEVER string concatenation)
+- Sanitize data before rendering in UI (prevent XSS)
+- Implement rate limiting on sensitive endpoints
+- Validate file uploads (type, size, content)
+- Whitelist allowed inputs, don't just blacklist bad ones
+- Validate on both client AND server
+
+### Authentication & Authorization
+- Never store passwords in plain text (use bcrypt/argon2)
+- Implement proper session management
+- Use HTTPS only for sensitive data
+- Implement CSRF protection
+- Apply principle of least privilege
+- Use JWT with reasonable expiration times
+- Validate tokens on every protected request
+- Check authorization not just authentication
+
+### Data Protection
+- Never log sensitive data (passwords, tokens, PII, credit cards)
+- Use environment variables for secrets (never commit them)
+- Implement proper access controls
+- Encrypt sensitive data at rest
+- Sanitize error messages shown to users
+- Don't expose stack traces to users
+- Use secure headers (CSP, X-Frame-Options, etc.)
+
+### Content Security Policy (CSP)
+- **MUST implement CSP in production via HTTP headers** (proper method)
+- For Vercel deployment, add to vercel.json:
+```json
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://your-api-domain.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+## ?? RULE 5: MOBILE-FIRST REQUIREMENTS (EVERY COMPONENT)
+
+### Responsive Design Checklist
+- [ ] Works perfectly on 320px (small phone)
+- [ ] Works perfectly on 768px (tablet)
+- [ ] Works perfectly on 1920px (desktop)
+- [ ] No horizontal scrolling at any size
+- [ ] Text readable without zoom (16px minimum)
+- [ ] Touch targets are 44x44px minimum
+- [ ] Images are optimized and responsive
+- [ ] Buttons/links are easily tappable
+- [ ] Forms are easy to complete on mobile
+
+### Mobile-First Development Process
+1. Design for mobile first (320px)
+2. Add tablet styles (768px)
+3. Add desktop styles (1920px)
+4. Test on actual devices, not just browser
+5. Use CSS Grid/Flexbox for layouts
+6. Use relative units (rem, em, %) over pixels
+7. Optimize images (WebP, lazy loading)
+
+---
+
+## ??? RULE 6: ARCHITECTURE & DESIGN PRINCIPLES
+
+### Separation of Concerns
+- Separate business logic from presentation layer
+- Keep data access isolated in dedicated layers/modules
+- Use dependency injection instead of hard-coded dependencies
+- Each module/class should have a single, well-defined responsibility
+
+### Modular Structure
+- Organize code into logical, loosely-coupled modules
+- Use clear boundaries between modules with defined interfaces
+- Avoid circular dependencies
+- Make it easy to swap implementations without affecting other parts
+
+### Design Patterns to Use
+**Prefer:**
+- Factory pattern for object creation
+- Strategy pattern for interchangeable algorithms
+- Repository pattern for data access
+- Adapter pattern for external integrations
+- Component composition over deep inheritance
+
+**Avoid:**
+- God objects that know/do too much
+- Singleton pattern (prefer dependency injection)
+- Deep inheritance hierarchies (favor composition)
+- Tight coupling between unrelated components
+
+### Software Engineering Practices
+- **Single Responsibility Principle**: Each function does ONE thing
+- **DRY (Don't Repeat Yourself)**: Extract duplicated code immediately
+- **Defensive Programming**: Validate inputs, handle errors
+- **Meaningful Names**: No single-letter variables (except i, j for loops)
+- **Error Handling Everywhere**: Try-catch with loading/error/success states
+- **Code Comments**: Explain WHY, not WHAT (code should be self-documenting)
+
+---
+
+## ?? RULE 7: CODE QUALITY STANDARDS
+
+### Naming & Documentation
+- Use descriptive, unambiguous names (no `data`, `temp`, `obj`, `thing`)
+- Function names should be verbs describing what they do
+- Boolean variables should be questions (`isLoading`, `hasError`, `canSubmit`)
+- Add JSDoc/docstrings for all public APIs
+- Include inline comments for complex business logic only
+- Document WHY, not WHAT
+
+### Functions & Methods
+- Keep functions small and focused (under 20 lines ideally, 50 lines max)
+- Maximum 3-4 parameters (use objects for more)
+- Pure functions when possible (no hidden side effects)
+- Always validate inputs at boundaries
+- Return early to avoid deep nesting
+- One level of abstraction per function
+
+### Error Handling
+- Never use empty catch blocks
+- Always log errors with context
+- Use specific error types, not generic exceptions
+- Fail fast and provide meaningful error messages
+- Implement proper error boundaries in UI
+- Show user-friendly error messages to users
+- Log technical details for debugging
+
+### Code Organization
+- Related code stays together
+- Files under 200 lines (split if larger)
+- Clear folder structure by feature/domain
+- Index files for clean imports
+- Consistent file naming conventions
+
+---
+
+## ?? RULE 8: API DEVELOPMENT STANDARDS
+
+### REST API Conventions (Every Endpoint)
+- Use proper HTTP methods:
+  - GET: Retrieve data (never modify)
+  - POST: Create new resource
+  - PUT/PATCH: Update existing resource
+  - DELETE: Remove resource
+- Use proper HTTP status codes:
+  - 200: Success (GET, PUT, PATCH)
+  - 201: Created (POST)
+  - 204: No Content (DELETE)
+  - 400: Bad Request (invalid input)
+  - 401: Unauthorized (not logged in)
+  - 403: Forbidden (insufficient permissions)
+  - 404: Not Found
+  - 500: Internal Server Error
+
+### Consistent Response Format
+```javascript
+{
+  success: boolean,
+  data: any,           // Present on success
+  error: string,       // Present on failure
+  message: string      // Human-readable message
+}
+```
+
+### API Quality Checklist
+- [ ] Input validation implemented
+- [ ] Error handling comprehensive
+- [ ] Authentication checked
+- [ ] Authorization enforced
+- [ ] Pagination for lists (limit, offset or cursor)
+- [ ] Rate limiting configured
+- [ ] Proper status codes used
+- [ ] Response format consistent
+- [ ] API versioned (/api/v1/...)
+- [ ] CORS configured correctly
+
+---
+
+## ?? RULE 9: TESTING REQUIREMENTS
+
+### Test Coverage
+- Write unit tests for all business logic
+- Add integration tests for critical paths
+- Test error cases and edge conditions
+- Test authentication/authorization flows
+- Test API endpoints
+- Aim for meaningful coverage (not just metrics)
+
+### Test Quality Standards
+- Tests should be readable and maintainable
+- Use descriptive test names that explain the scenario
+- Follow Arrange-Act-Assert pattern
+- Mock external dependencies (APIs, databases)
+- Tests should be deterministic and isolated
+- Tests should run fast (< 5 seconds total)
+- One assertion per test when possible
+
+### Testing Strategy
+```
+1. Write the test (what should happen)
+2. Run the test (it should fail)
+3. Write minimal code to pass
+4. Refactor if needed
+5. Run all tests again
+```
+
+---
+
+## ? RULE 10: PERFORMANCE & SCALABILITY
+
+### Database Optimization
+- Add proper indexes from the start
+- Use database migrations for schema changes
+- Implement pagination for list queries
+- Avoid N+1 queries (use eager loading/joins)
+- Use connection pooling
+- Monitor slow queries
+- Regular database backups
+
+### Caching Strategy
+- Cache expensive computations
+- Implement appropriate cache invalidation
+- Use Redis/Memcached for distributed caching
+- Set reasonable TTLs (Time To Live)
+- Cache at multiple levels (browser, CDN, server)
+- Don't cache sensitive data
+
+### Frontend Performance
+- Lazy load images and components
+- Code split large bundles
+- Minimize JavaScript bundle size
+- Use CDN for static assets
+- Implement service workers for offline
+- Optimize critical rendering path
+- Target Lighthouse score 90+
+
+---
+
+## ?? RULE 11: DEPENDENCY MANAGEMENT
+
+### Package Selection Criteria
+- Prefer well-maintained packages with active communities
+- Check for security vulnerabilities before adding (npm audit)
+- Minimize dependencies (avoid package bloat)
+- Pin dependency versions in production
+- Keep dependencies updated (schedule regular audits)
+- Check bundle size impact (use bundlephobia.com)
+- Evaluate license compatibility
+- Have exit strategy for third-party services
+
+### Avoiding Dependency Traps
+- Don't add packages for trivial functionality
+- Avoid packages with too many dependencies
+- Check last update date and issue count
+- Prefer packages with TypeScript support
+- Review package code before using (especially for security)
+
+---
+
+## ?? RULE 12: RED FLAGS THAT MUST STOP DEVELOPMENT
+
+### Immediate Stop Signals
+- ? User reports console errors ? Fix immediately
+- ? Something doesn't work ? Debug before continuing
+- ? Previous features broke ? Revert and fix
+- ? Code exceeds 30 lines ? Break into smaller pieces
+- ? User seems confused ? Clarify before proceeding
+- ? About to make breaking changes ? Get explicit approval
+- ? About to skip testing ? Never skip, always verify
+- ? About to commit secrets ? Stop and use environment variables
+- ? Security vulnerability identified ? Fix immediately
+
+### When to Pause and Reassess
+- Multiple test failures
+- User feedback indicates wrong direction
+- Code becoming too complex
+- Technical debt accumulating
+- Performance degrading
+- Dependencies breaking
+
+---
+
+## ? RULE 13: ANTI-PATTERNS TO AVOID (VIBE CODING RED FLAGS)
+
+### Code Smells
+- ? TODO comments that never get addressed
+- ? "Quick fix" that becomes permanent
+- ? Copy-pasting code instead of abstracting
+- ? Skipping validation because "users won't do that"
+- ? Hardcoding values that should be configurable
+- ? No error handling because "it shouldn't fail"
+- ? Mixing concerns because "it's faster"
+- ? Skipping tests because "it's simple"
+- ? Large PRs that do multiple things
+- ? Using `any` type everywhere (TypeScript)
+- ? Console.log statements left in production
+- ? Commented-out code left in repository
+
+### Technical Debt Indicators
+- Code duplication across multiple files
+- Functions longer than 50 lines
+- Classes with more than 10 methods
+- Complex conditional logic without extraction
+- Missing documentation on public APIs
+- No tests for critical functionality
+- Hard-coded configuration values
+- Unclear variable names
+
+### Process Anti-Patterns
+- ? Writing 100+ lines before testing
+- ? Skipping the verification checkpoint
+- ? Not waiting for user confirmation
+- ? Making multiple changes at once
+- ? Assuming tests pass without running them
+- ? Committing without testing
+- ? Ignoring console errors
+
+---
+
+## ?? RULE 14: CONFIGURATION & ENVIRONMENT
+
+### Environment Setup
+- Use environment variables for all configuration
+- Never commit `.env` files to repository
+- Provide `.env.example` template with dummy values
+- Document all required environment variables
+- Validate environment on startup (fail fast)
+- Use different configs for dev/staging/production
+
+### Environment Variables Checklist
+- [ ] Database connection strings
+- [ ] API keys and secrets
+- [ ] JWT secret keys
+- [ ] Third-party service credentials
+- [ ] Feature flags
+- [ ] Environment name (dev/staging/prod)
+
+### Deployment Considerations
+- Code should work across environments without changes
+- Use feature flags for gradual rollouts
+- Implement health check endpoints
+- Log structured data for easier querying
+- Plan for rollback scenarios
+- Automated deployment pipeline
+- Monitoring and alerting configured
+
+---
+
+## ?? RULE 15: GIT COMMIT CONVENTIONS
+
+### Commit Message Format
+```
+<type>: <description>
+
+[optional body]
+
+[optional footer]
+```
+
+### Types
+- `feat`: New feature
+- `fix`: Bug fix
+- `refactor`: Code restructuring (no behavior change)
+- `style`: Formatting changes (no code change)
+- `docs`: Documentation changes
+- `test`: Adding or updating tests
+- `chore`: Maintenance tasks
+
+### Examples
+```
+feat: add user authentication with JWT
+fix: prevent race condition in checkout process
+refactor: extract payment logic into service
+test: add unit tests for validation functions
+```
+
+### Commit Best Practices
+- Commit after each verified change
+- Keep commits small and focused
+- Write clear, descriptive messages
+- Reference issue numbers when applicable
+- Don't commit commented-out code
+- Don't commit console.logs
+
+---
+
+## ?? PROJECT CONTEXT: HR CONNECT PORTFOLIO
+
+### Current Project Structure
+```
+hr-connect-mobile/
+??? src/
+?   ??? components/
+?   ?   ??? LoginForm.tsx
+?   ?   ??? LoginForm.css
+?   ?   ??? EmployeeDashboard.tsx
+?   ?   ??? EmployeeDashboard.css
+?   ??? contexts/
+?   ?   ??? AuthContext.tsx
+?   ?   ??? AuthProvider.tsx
+?   ??? services/
+?   ?   ??? auth.service.ts
+?   ??? types/
+?   ?   ??? auth.types.ts
+?   ??? App.tsx
+?   ??? App.css
+?   ??? main.tsx
+?   ??? index.css
+?   ??? vite-env.d.ts
+??? .env.example
+??? .env.local
+??? index.html
+??? package.json
+??? tsconfig.json
+??? tsconfig.node.json
+??? vite.config.ts
+```
+
+### Current TODO Status
+- ? Project setup: Initialize frontend configuration files
+- ? Create HTML entry point and src folder structure
+- ? Build main App component with mobile-first layout
+- ? Create authentication context with JWT management
+- ? Build login form UI with validation (mobile-first)
+- ? Implement API service layer with Axios interceptors
+- ?? Create employee dashboard component
+- ? Build time-off request form component
+- ? Add responsive navigation and routing
+- ? Implement error handling and loading states
+- ? Create environment configuration (.env files)
+- ? Add ESLint configuration for code quality
+- ? Write unit tests for components and services
+- ? Create comprehensive README with screenshots
+- ? Create deployment configuration with CSP headers
+
+### Technologies Used
+- **Frontend**: React 18, TypeScript, Vite
+- **Styling**: CSS3 with CSS Custom Properties
+- **HTTP Client**: Axios
+- **Authentication**: JWT with refresh tokens
+- **State Management**: React Context API
+- **Build Tool**: Vite
+- **Development**: Hot Module Replacement (HMR)
+
+### Key Features Implemented
+- Mobile-first responsive design
+- JWT authentication system
+- Environment configuration
+- Professional error handling
+- Type-safe API service layer
+- Component-based architecture
+- Security best practices
+
+---
+
+## ?? FINAL REMINDERS
+
+### For AI Assistant
+- Follow these rules STRICTLY
+- Never skip verification checkpoints
+- Never write more than 30 lines at once
+- Always wait for user confirmation
+- Break large tasks into subtasks
+- Test every change immediately
+- Communicate clearly and completely
+- Stop at red flags
+
+### For Developer
+- Hold AI accountable
+- Say "too much code" if AI writes >30 lines
+- Say "wait, test first" if AI skips verification
+- Confirm each step before proceeding
+- Don't rush - quality over speed
+- Test thoroughly on multiple devices
+- Review code before committing
+- Ask questions when unclear
+
+---
+
+## ?? THE ULTIMATE RULE
+
+**Code that ships is not the goal. Code that lasts is the goal.**
+
+Build it right the first time, one small verified step at a time.
+
+---
+
+**Remember**: You're not just building a project. You're demonstrating professional software engineering skills that will impress interviewers and serve you throughout your career. Every line of code is a chance to show craftsmanship.
+

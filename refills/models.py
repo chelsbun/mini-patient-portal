@@ -1,12 +1,26 @@
+"""
+Refills Models Module
+
+Purpose: Defines RefillRequest model with status workflow (PENDING, APPROVED, DENIED, CANCELLED).
+Author: Chelsea Bonyata
+Last Modified: February 2026
+"""
+
 from django.conf import settings
 from django.db import models
 
 
 class RefillRequest(models.Model):
+    """
+    Represents a patient's request to refill a medication.
+    
+    Tracks status workflow: PENDING -> APPROVED/DENIED/CANCELLED.
+    """
     class Status(models.TextChoices):
         PENDING = "PENDING", "Pending"
         APPROVED = "APPROVED", "Approved"
         DENIED = "DENIED", "Denied"
+        CANCELLED = "CANCELLED", "Cancelled"
 
     medication = models.ForeignKey(
         "meds.Medication",

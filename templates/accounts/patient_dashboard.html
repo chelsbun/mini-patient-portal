@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}My Dashboard - Patient Portal{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <h2 class="mb-4">Welcome, {{ request.user.username }}</h2>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Medications Section -->
+  <div class="col-md-6 mb-4">
+    <div class="card h-100">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">My Medications</h5>
+      </div>
+      <div class="card-body">
+        {% if medications %}
+          {% for medication in medications %}
+            <div class="d-flex justify-content-between align-items-center mb-3 p-2 border rounded">
+              <div>
+                <strong>{{ medication.name }}</strong><br>
+                <small class="text-muted">{{ medication.dose }} · {{ medication.frequency }}</small>
+              </div>
+              {% if medication.id in pending_med_ids %}
+                <span class="badge bg-warning text-dark">Pending</span>
+              {% else %}
+                <form method="post" action="{% url 'request-refill' medication.id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-outline-primary btn-sm">Request Refill</button>
+                </form>
+              {% endif %}
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-muted mb-0">No medications on file.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Refill Requests Section -->
+  <div class="col-md-6 mb-4">
+    <div class="card h-100">
+      <div class="card-header bg-secondary text-white">
+        <h5 class="mb-0">Refill Requests</h5>
+      </div>
+      <div class="card-body">
+        {% if refill_requests %}
+          {% for req in refill_requests %}
+            <div class="mb-3 p-2 border rounded">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <strong>{{ req.medication.name }}</strong>
+                  <span class="ms-2 status-{% if req.status == 'APPROVED' %}approved{% elif req.status == 'DENIED' %}denied{% elif req.status == 'CANCELLED' %}cancelled{% else %}pending{% endif %}">
+                    {{ req.status }}
+                  </span>
+                </div>
+                {% if req.status == 'PENDING' %}
+                  <form method="post" action="{% url 'cancel-refill' req.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-secondary btn-sm">Cancel</button>
+                  </form>
+                {% endif %}
+              </div>
+              <small class="text-muted">Requested: {{ req.requested_at|date:"M d, Y g:i A" }}</small>
+              {% if req.reviewed_at %}
+                <br><small class="text-muted">Reviewed: {{ req.reviewed_at|date:"M d, Y g:i A" }} by {{ req.reviewed_by.username }}</small>
+                {% if req.provider_note %}
+                  <div class="alert alert-light mt-2 mb-0 py-1 px-2">
+                    <small><strong>Note:</strong> {{ req.provider_note }}</small>
+                  </div>
+                {% endif %}
+              {% endif %}
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-muted mb-0">No refill requests yet.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

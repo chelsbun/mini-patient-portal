@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Add Medication - Staff Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <div class="card-header bg-success text-white">
+        <h5 class="mb-0">Add Medication to Patient</h5>
+      </div>
+      <div class="card-body">
+        {% if error %}
+          <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        {% if success %}
+          <div class="alert alert-success">{{ success }}</div>
+        {% endif %}
+        
+        <form method="post">
+          {% csrf_token %}
+          
+          <div class="mb-3">
+            <label for="patient_id" class="form-label">Patient *</label>
+            <select name="patient_id" id="patient_id" class="form-select" required>
+              <option value="">Select a patient...</option>
+              {% for patient in patients %}
+                <option value="{{ patient.id }}">
+                  {{ patient.username }}
+                  {% if patient.first_name or patient.last_name %}
+                    ({{ patient.first_name }} {{ patient.last_name }})
+                  {% endif %}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+          
+          <div class="mb-3">
+            <label for="name" class="form-label">Medication Name *</label>
+            <input type="text" name="name" id="name" class="form-control" required placeholder="e.g., Lisinopril">
+          </div>
+          
+          <div class="mb-3">
+            <label for="dose" class="form-label">Dose *</label>
+            <input type="text" name="dose" id="dose" class="form-control" required placeholder="e.g., 10mg">
+          </div>
+          
+          <div class="mb-3">
+            <label for="frequency" class="form-label">Frequency *</label>
+            <input type="text" name="frequency" id="frequency" class="form-control" required placeholder="e.g., Once daily">
+          </div>
+          
+          <div class="d-flex justify-content-between">
+            <a href="{% url 'staff-dashboard' %}" class="btn btn-secondary">Back</a>
+            <button type="submit" class="btn btn-success">Add Medication</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
