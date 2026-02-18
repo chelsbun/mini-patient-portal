@@ -24,6 +24,8 @@
           {{ user.username }}
           {% if user.profile.role == 'PROVIDER' %}
             <span class="badge bg-light text-primary ms-1">Provider</span>
+          {% elif user.profile.role == 'STAFF' %}
+            <span class="badge bg-light text-primary ms-1">Staff</span>
           {% else %}
             <span class="badge bg-light text-primary ms-1">Patient</span>
           {% endif %}
